@@ -9,18 +9,6 @@ app.use(express.json());
 app.get('/', (req, res) => {
   res.json('Server is running');
 });
-passport.use(
-  new GoogleStrategy(
-    {
-      clientID: keys.googleClientID,
-      clientSecret: keys.googleClientSecret,
-      callbackURL: '/auth/google/callback',
-    },
-    (accessToken) => {
-      console.log(accessToken);
-    }
-  )
-);
 
 app.listen(PORT, () => {
   console.log(`Server is running on ${PORT}`);
