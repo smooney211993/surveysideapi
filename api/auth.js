@@ -1,6 +1,7 @@
 const express = require('express');
-const router = express.router();
+const router = express.Router();
 const passport = require('passport');
+const keys = require('../config/keys');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 passport.use(
   new GoogleStrategy(
@@ -21,3 +22,5 @@ router.get(
     scope: ['profile', 'email'],
   })
 );
+
+module.exports = router;
