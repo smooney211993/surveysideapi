@@ -8,19 +8,24 @@ passport.use(
     {
       clientID: keys.googleClientID,
       clientSecret: keys.googleClientSecret,
-      callbackURL: '/auth/google/callback',
+      callbackURL: 'http://localhost:3000/api/auth/google/callback',
     },
-    (accessToken) => {
+    (accessToken, refreshToken, profile, done) => {
       console.log(accessToken);
+      console.log(refreshToken);
+      console.log(profile);
     }
   )
 );
-
+// api/auth/google
+//
 router.get(
-  '/',
+  '/google',
   passport.authenticate('google', {
     scope: ['profile', 'email'],
   })
 );
-
+// api/auth/google/callback
+// after retrieved the code to get the profile
+router.get('/google/callback', passport.authenticate('google'));
 module.exports = router;
