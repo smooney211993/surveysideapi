@@ -2,11 +2,14 @@ const express = require('express');
 const app = express();
 const PORT = process.env.PORT || 3000;
 const passport = require('passport');
-const GoogleStrategy = require('passport-google-oauth20').Strategy;
-const conenctDB = require('./config/db');
+const mongoose = require('mongoose');
+const connectDB = require('./config/db');
+
+// passport config
+require('./config/passport')(passport);
 
 const auth = require('./api/auth');
-const connectDB = require('./config/db');
+
 connectDB();
 app.use(express.json());
 
