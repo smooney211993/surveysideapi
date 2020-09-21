@@ -25,7 +25,7 @@ router.get(
     scope: ['profile', 'email'],
   })
 );
-const apple = 'fruit';
+
 // api/auth/google/callback
 // after retrieved the code to get the profile
 router.get('/google/callback', passport.authenticate('google'));

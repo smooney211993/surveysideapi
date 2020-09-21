@@ -3,8 +3,11 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
-const keys = require('./config/keys');
+const conenctDB = require('./config/db');
+
 const auth = require('./api/auth');
+const connectDB = require('./config/db');
+connectDB();
 app.use(express.json());
 
 app.get('/', (req, res) => {

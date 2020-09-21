@@ -9,6 +9,7 @@ const connectDB = async () => {
       useCreateIndex: true,
       useFindAndModify: false,
     });
+    console.log('mongoose db connect');
   } catch (error) {
     console.log(error.message);
     process.exit();
