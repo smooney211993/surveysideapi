@@ -2,15 +2,24 @@ const express = require('express');
 const app = express();
 const PORT = process.env.PORT || 3000;
 const passport = require('passport');
-const mongoose = require('mongoose');
+const cookieSession = require('cookie-session');
 const connectDB = require('./config/db');
+const keys = require('./config/keys');
 
 // passport config
 require('./config/passport')(passport);
-
+// route handlers
 const auth = require('./api/auth');
 
 connectDB();
+app.use(
+  cookieSession({
+    maxAge: 30 * 24 * 60 * 60 * 1000,
+    keys: [keys.cookieKey],
+  })
+);
+app.use(passport.initialize());
+app.use(passport.session());
 app.use(express.json());
 
 app.get('/', (req, res) => {

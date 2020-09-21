@@ -13,5 +13,8 @@ router.get(
 
 // api/auth/google/callback
 // after retrieved the code to get the profile
-router.get('/google/callback', passport.authenticate('google'));
+router.get('/google/callback', passport.authenticate('google'), (req, res) => {
+  console.log(req.user);
+  res.json(req.user);
+});
 module.exports = router;

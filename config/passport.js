@@ -10,11 +10,6 @@ module.exports = function (passport) {
         clientSecret: keys.googleClientSecret,
         callbackURL: 'http://localhost:3000/api/auth/google/callback',
       },
-      (accessToken, refreshToken, profile, done) => {
-        console.log(accessToken);
-        console.log(refreshToken);
-        console.log(profile);
-      },
       async (accessToken, refreshToken, profile, done) => {
         const newUser = {
           googleId: profile.id,
@@ -27,8 +22,10 @@ module.exports = function (passport) {
             done(null, user);
           } else {
             user = await User.create(newUser);
+            await user.save();
             done(null, user);
           }
+          console.log(user);
         } catch (error) {
           console.log(error.message);
         }
