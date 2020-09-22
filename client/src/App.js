@@ -2,8 +2,9 @@ import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import './App.css';
 // Components
+import Dashboard from './Components/Dashboard';
+import PrivateRoute from './Components/routing/PrivateRoute';
 import Landing from './Components/Landing';
-
 // redux
 import { Provider } from 'react-redux';
 import store from './store';
@@ -15,14 +16,13 @@ const App = () => {
   }, []);
   return (
     <Provider store={store}>
-      <>
-        Hello
-        <a href='http://localhost:5000/api/auth/google'>Sign in With Google</a>
-      </>
       <Router>
-        <Switch>
-          <Route exact path='/survey' component={Landing} />
-        </Switch>
+        <>
+          <Switch>
+            <Route exact path='/' component={Landing} />
+            <PrivateRoute exact path='/dashboard' component={Dashboard} />
+          </Switch>
+        </>
       </Router>
     </Provider>
   );

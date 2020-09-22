@@ -13,14 +13,14 @@ export default function (state = initialState, action) {
       return {
         ...state,
         user: payload,
-        loading: false,
+        loaded: false,
         isAuthenticated: true,
       };
     case AUTH_ERROR:
       return {
         ...state,
         user: null,
-        loading: false,
+        loaded: false,
         isAuthenticated: null,
       };
     default:
