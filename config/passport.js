@@ -8,7 +8,8 @@ module.exports = function (passport) {
       {
         clientID: keys.googleClientID,
         clientSecret: keys.googleClientSecret,
-        callbackURL: 'http://localhost:3000/api/auth/google/callback',
+        callbackURL: '/api/auth/google/callback',
+        proxy: true,
       },
       async (accessToken, refreshToken, profile, done) => {
         const newUser = {
@@ -19,7 +20,7 @@ module.exports = function (passport) {
         try {
           let user = await User.findOne({ googleId: profile.id });
           if (user) {
-            done(null, user);
+            return done(null, user);
           } else {
             user = await User.create(newUser);
             await user.save();

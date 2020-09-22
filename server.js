@@ -5,6 +5,7 @@ const passport = require('passport');
 const cookieSession = require('cookie-session');
 const connectDB = require('./config/db');
 const keys = require('./config/keys');
+const cors = require('cors');
 
 // passport config
 require('./config/passport')(passport);
@@ -18,6 +19,7 @@ app.use(
     keys: [keys.cookieKey],
   })
 );
+app.use(cors());
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.json());
