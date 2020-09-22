@@ -2,9 +2,9 @@ import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import './App.css';
 // Components
-import Dashboard from './Components/Dashboard';
+import Dashboard from './Components/layout/Dashboard';
 import PrivateRoute from './Components/routing/PrivateRoute';
-import Landing from './Components/Landing';
+import Landing from './Components/layout/Landing';
 // redux
 import { Provider } from 'react-redux';
 import store from './store';

@@ -10,7 +10,7 @@ const cors = require('cors');
 // passport config
 require('./config/passport')(passport);
 // route handlers
-const auth = require('./api/auth');
+const auth = require('./routes/api/auth');
 
 connectDB();
 app.use(
