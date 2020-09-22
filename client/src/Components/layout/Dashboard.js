@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 const Dashboard = ({ user }) => {
-  return <div> hello {user.firstName} you are logged in!</div>;
+  return <div> hello {user && user.firstName} you are logged in!</div>;
 };
 
 Dashboard.propTypes = {

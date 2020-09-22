@@ -1,9 +1,9 @@
-import { USER_LOADED, AUTH_ERROR } from '../actions/types';
+import { USER_LOADED, AUTH_ERROR, LOG_OUT } from '../actions/types';
 
 const initialState = {
   user: null,
   isAuthenticated: null,
-  loaded: true,
+  loading: true,
 };
 
 export default function (state = initialState, action) {
@@ -13,14 +13,15 @@ export default function (state = initialState, action) {
       return {
         ...state,
         user: payload,
-        loaded: false,
+        loading: false,
         isAuthenticated: true,
       };
     case AUTH_ERROR:
+    case LOG_OUT:
       return {
         ...state,
         user: null,
-        loaded: false,
+        loading: false,
         isAuthenticated: null,
       };
     default:
