@@ -22,6 +22,9 @@ router.get(
   }
 );
 router.get('/me', (req, res) => {
+  if (!req.user) {
+    return res.status(400).json({ error: 'You need to log in' });
+  }
   res.send(req.user);
 });
 
