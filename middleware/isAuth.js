@@ -1,9 +1,8 @@
 const isAuth = (req, res, next) => {
-  if (req.isAuthenticated()) {
-    return next();
-  } else {
-    return res.status(401).send({ error: 'You must log in!' });
+  if (!req.user) {
+    return res.status(400).json({ error: 'Access Denied' });
   }
+  next();
 };
 
 module.exports = isAuth;
