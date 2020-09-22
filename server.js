@@ -23,7 +23,7 @@ app.use(passport.session());
 app.use(express.json());
 
 app.get('/', (req, res) => {
-  res.json('Server is running');
+  res.json('Server is Running');
 });
 
 app.use('/api/auth', auth);
