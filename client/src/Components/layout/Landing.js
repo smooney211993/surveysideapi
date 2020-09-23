@@ -8,12 +8,11 @@ const Landing = ({ isAuthenticated }) => {
     return <Redirect to='/dashboard' />;
   }
   return (
-    <div>
-      <>
-        Hello
-        <a href='http://localhost:5000/api/auth/google'>Sign in With Google</a>
-      </>
-    </div>
+    <section className='container'>
+      <div className='dark-overlay'></div>
+      <h1 className='display-1'>Hello</h1>
+      <p className='font-weight-bold'>SurveySide</p>
+    </section>
   );
 };
 Landing.propTypes = {
