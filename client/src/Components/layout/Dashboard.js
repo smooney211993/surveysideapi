@@ -1,27 +1,30 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import Spinner from './Spinner';
 
-const Dashboard = ({ user }) => {
-  return (
+const Dashboard = ({ user, loading }) => {
+  return loading ? (
+    <Spinner />
+  ) : (
     <>
       <header id='main-header' className='py-2 bg-primary text-white expand-sm'>
         <div className='container'>
           <div className='row'>
             <div className='col'>
-              <h3 className='mt-2'>
+              <h4 className='mt-2'>
                 {' '}
                 <i className='fas fa-users-cog'></i> Dashboard
-              </h3>
+              </h4>
             </div>
             <div className='col'>
-              <p className='h3 mt-2'>
+              <p className='h4 mt-2'>
                 <i className='fas fa-coins'></i>
-                {user && user.credits}
+                {user && user.credits} Credits
               </p>
             </div>
             <div className='col'>
-              <p className='h3 mt-2'>
+              <p className='h4 mt-2'>
                 <i className='fa fa-user'></i>Hello {user && user.firstName}
               </p>
             </div>
@@ -39,5 +42,6 @@ Dashboard.propTypes = {
 
 const mappedStateToProps = (state) => ({
   user: state.auth.user,
+  loading: state.auth.loading,
 });
 export default connect(mappedStateToProps)(Dashboard);
