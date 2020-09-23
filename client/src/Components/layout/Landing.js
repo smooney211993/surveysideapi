@@ -8,10 +8,14 @@ const Landing = ({ isAuthenticated }) => {
     return <Redirect to='/dashboard' />;
   }
   return (
-    <section className='container'>
-      <div className='dark-overlay'></div>
-      <h1 className='display-1'>Hello</h1>
-      <p className='font-weight-bold'>SurveySide</p>
+    <section className=' landing '>
+      <div className='landing-inner text-grey mt-100'>
+        <h1 className='display-4'>SurveySide</h1>
+        <p className='font-weight-bold'>
+          Grow your business with the ability to send surveys for feedback with
+          a click of a button
+        </p>
+      </div>
     </section>
   );
 };
