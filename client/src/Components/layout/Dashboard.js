@@ -5,16 +5,26 @@ import PropTypes from 'prop-types';
 const Dashboard = ({ user }) => {
   return (
     <>
-      <header id='main-header' className='py-2 bg-primary text-white'>
+      <header id='main-header' className='py-2 bg-primary text-white expand-sm'>
         <div className='container'>
-          <div className='d-flex justify-content-around'>
-            <h1>
-              {' '}
-              <i className='fas fa-envelope-open-text'></i> Dashboard
-            </h1>
-            <p className='h4 display mt-3 ml-auto'>
-              <i className='fa fa-user'></i>Hello {user && user.firstName}
-            </p>
+          <div className='row'>
+            <div className='col'>
+              <h3 className='mt-2'>
+                {' '}
+                <i className='fas fa-users-cog'></i> Dashboard
+              </h3>
+            </div>
+            <div className='col'>
+              <p className='h3 mt-2'>
+                <i className='fas fa-coins'></i>
+                {user && user.credits}
+              </p>
+            </div>
+            <div className='col'>
+              <p className='h3 mt-2'>
+                <i className='fa fa-user'></i>Hello {user && user.firstName}
+              </p>
+            </div>
           </div>
         </div>
       </header>
@@ -24,7 +34,7 @@ const Dashboard = ({ user }) => {
 };
 
 Dashboard.propTypes = {
-  user: PropTypes.object.isRequired,
+  user: PropTypes.object,
 };
 
 const mappedStateToProps = (state) => ({
