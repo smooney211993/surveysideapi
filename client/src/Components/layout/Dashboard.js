@@ -23,15 +23,17 @@ const Dashboard = ({ user, loading }) => {
                 {user && user.credits} Credits
               </p>
             </div>
-            <div className='col'>
-              <p className='h4 mt-2'>
-                <i className='fa fa-user'></i>Hello {user && user.firstName}
-              </p>
-            </div>
           </div>
         </div>
       </header>
-      <div className='container'></div>
+      <div className='container'>
+        <p className='h4 mt-2'>
+          <i className='fa fa-user'></i>Hello {user && user.firstName}
+        </p>
+        <div className='container'>
+          <div className='col'></div>
+        </div>
+      </div>
     </>
   );
 };
