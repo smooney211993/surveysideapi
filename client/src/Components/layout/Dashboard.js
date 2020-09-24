@@ -2,7 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Spinner from './Spinner';
-
+import StripeCheckout from 'react-stripe-checkout';
+import DashboardButtons from './DashboardButtons';
 const Dashboard = ({ user, loading }) => {
   return loading ? (
     <Spinner />
@@ -17,23 +18,21 @@ const Dashboard = ({ user, loading }) => {
                 <i className='fas fa-users-cog'></i> Dashboard
               </h4>
             </div>
-            <div className='col'>
-              <p className='h4 mt-2'>
-                <i className='fas fa-coins'></i>
-                {user && user.credits} Credits
-              </p>
-            </div>
           </div>
         </div>
       </header>
       <div className='container'>
-        <p className='h4 mt-2'>
-          <i className='fa fa-user'></i>Hello {user && user.firstName}
-        </p>
-        <div className='container'>
-          <div className='col'></div>
+        <div className='row'>
+          <div className='col'>
+            <p className='h4 mt-2'>
+              <i className='fa fa-user'></i>Hello {user && user.firstName}
+            </p>
+          </div>
         </div>
       </div>
+      <>
+        <DashboardButtons />
+      </>
     </>
   );
 };
