@@ -18,7 +18,7 @@ const Navbar = ({
           amount={500}
           token={(token) => console.log(token)}
           stripeKey={process.env.REACT_APP_STRIPE_KEY}>
-          <a href='' className='nav-link'>
+          <a href='#!' className='nav-link'>
             {' '}
             <i className='fas fa-coins'></i>
             {user && user.credits} Credits
