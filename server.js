@@ -11,6 +11,7 @@ const cors = require('cors');
 require('./config/passport')(passport);
 // route handlers
 const auth = require('./routes/api/auth');
+const billing = require('./routes/api/billing');
 
 connectDB();
 app.use(
@@ -29,6 +30,7 @@ app.get('/', (req, res) => {
 });
 
 app.use('/api/auth', auth);
+app.use('/api/billing', billing);
 
 app.listen(PORT, () => {
   console.log(`Server is running on ${PORT}`);

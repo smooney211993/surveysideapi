@@ -2,12 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { logOut } from '../../actions/auth';
+import { logOut, addCredits } from '../../actions/auth';
 import StripeCheckout from 'react-stripe-checkout';
 
 const Navbar = ({
   auth: { loading, isAuthenticated, user, credits },
   logOut,
+  addCredits,
 }) => {
   const authLinks = (
     <ul className='navbar-nav'>
@@ -16,7 +17,9 @@ const Navbar = ({
           name='SurveySide'
           description='$5 dollars for 5 survey credits'
           amount={500}
-          token={(token) => console.log(token)}
+          token={(token) => {
+            addCredits(token);
+          }}
           stripeKey={process.env.REACT_APP_STRIPE_KEY}>
           <a href='#!' className='nav-link'>
             {' '}
@@ -60,4 +63,4 @@ const mappedStateToProps = (state) => ({
   auth: state.auth,
 });
 
-export default connect(mappedStateToProps, { logOut })(Navbar);
+export default connect(mappedStateToProps, { logOut, addCredits })(Navbar);

@@ -1,8 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import StripeCheckout from 'react-stripe-checkout';
+import { connect } from 'react-redux';
+import { addCredits } from '../../actions/auth';
 
-const DashboardButtons = (props) => {
+const DashboardButtons = ({ addCredits }) => {
   return (
     <section id='actions' className='py-4 mb-4 '>
       <div className='container'>
@@ -12,7 +14,9 @@ const DashboardButtons = (props) => {
               name='SurveySide'
               description='$5 dollars for 5 survey credits'
               amount={500}
-              token={(token) => console.log(token)}
+              token={(token) => {
+                addCredits(token);
+              }}
               stripeKey={process.env.REACT_APP_STRIPE_KEY}>
               <button className='btn btn-primary btn-block'>
                 <i className='fas fa-plus'></i> Add Credits
@@ -27,4 +31,4 @@ const DashboardButtons = (props) => {
 
 DashboardButtons.propTypes = {};
 
-export default DashboardButtons;
+export default connect(null, { addCredits })(DashboardButtons);

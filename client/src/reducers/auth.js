@@ -1,9 +1,16 @@
-import { USER_LOADED, AUTH_ERROR, LOG_OUT } from '../actions/types';
+import {
+  USER_LOADED,
+  AUTH_ERROR,
+  LOG_OUT,
+  PAYMENT_SUCCESS,
+  PAYMENT_FAIL,
+} from '../actions/types';
 
 const initialState = {
   user: null,
   isAuthenticated: null,
   loading: true,
+  paymentError: {},
 };
 
 export default function (state = initialState, action) {
@@ -24,6 +31,13 @@ export default function (state = initialState, action) {
         loading: false,
         isAuthenticated: null,
       };
+    case PAYMENT_SUCCESS:
+      return {
+        ...state,
+        user: { ...state.user, credits: payload },
+      };
+    case PAYMENT_FAIL:
+      return { ...state, paymentError: payload };
     default:
       return state;
   }
