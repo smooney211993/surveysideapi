@@ -14,6 +14,4 @@ const Spinner = (props) => {
   );
 };
 
-Spinner.propTypes = {};
-
 export default Spinner;

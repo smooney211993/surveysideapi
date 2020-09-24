@@ -9,6 +9,8 @@ const DashboardButtons = (props) => {
         <div className='row'>
           <div className='col-md-3'>
             <StripeCheckout
+              name='SurveySide'
+              description='$5 dollars for 5 survey credits'
               amount={500}
               token={(token) => console.log(token)}
               stripeKey={process.env.REACT_APP_STRIPE_KEY}>

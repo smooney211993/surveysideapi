@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Spinner from './Spinner';
-import StripeCheckout from 'react-stripe-checkout';
 import DashboardButtons from './DashboardButtons';
 const Dashboard = ({ user, loading }) => {
   return loading ? (

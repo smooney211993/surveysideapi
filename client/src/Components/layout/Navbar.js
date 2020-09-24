@@ -13,6 +13,8 @@ const Navbar = ({
     <ul className='navbar-nav'>
       <li className='nav-item px-2'>
         <StripeCheckout
+          name='SurveySide'
+          description='$5 dollars for 5 survey credits'
           amount={500}
           token={(token) => console.log(token)}
           stripeKey={process.env.REACT_APP_STRIPE_KEY}>
