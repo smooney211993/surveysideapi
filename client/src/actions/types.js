@@ -6,3 +6,5 @@ export const PAYMENT_FAIL = 'PAYMENT FAILED';
 export const CREATE_SURVEY = 'CREATE_SURVEY';
 export const SURVEY_ERROR = 'SURVEY_ERROR';
 export const GET_SURVEYS = 'GET_SURVEYS';
+export const SET_ALERT = 'SET_ALERT';
+export const REMOVE_ALERT = 'REMOVE_ALERT';

@@ -7,6 +7,7 @@ import PrivateRoute from './Components/routing/PrivateRoute';
 import Landing from './Components/layout/Landing';
 import Navbar from './Components/layout/Navbar';
 import SurveyForm from './Components/surveyforms/SurveyForm';
+import Alert from './Components/layout/Alert';
 // redux
 import { Provider } from 'react-redux';
 import store from './store';
@@ -20,6 +21,7 @@ const App = () => {
     <Provider store={store}>
       <Router>
         <Navbar />
+
         <>
           <Switch>
             <Route exact path='/' component={Landing} />
@@ -27,6 +29,7 @@ const App = () => {
             <PrivateRoute exact path='/create-survey' component={SurveyForm} />
           </Switch>
         </>
+        <Alert />
       </Router>
     </Provider>
   );

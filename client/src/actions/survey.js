@@ -1,4 +1,5 @@
 import { CREATE_SURVEY, SURVEY_ERROR, GET_SURVEYS } from './types';
+import { setAlert } from './alert';
 import axios from 'axios';
 
 export const createSurvey = (formState) => async (dispatch) => {
@@ -9,6 +10,10 @@ export const createSurvey = (formState) => async (dispatch) => {
       payload: data,
     });
   } catch (error) {
+    const err = error.response.data.errors;
+    if (err) {
+      err.forEach((error) => dispatch(setAlert(error.msg, 'danger')));
+    }
     dispatch({
       type: SURVEY_ERROR,
       payload: { msg: error.response.statusText, error: error.response.status },
