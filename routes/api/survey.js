@@ -3,6 +3,7 @@ const router = express.Router();
 const { body, validationResult } = require('express-validator');
 const Survey = require('../../models/Survey');
 const isAuth = require('../../middleware/isAuth');
+const requireCredits = require('../../middleware/requireCredits');
 
 // create new survey
 // cookie required
@@ -10,6 +11,7 @@ const isAuth = require('../../middleware/isAuth');
 router.post(
   '/survey',
   isAuth,
+  requireCredits,
   [
     body('title', 'Title is required').not().isEmpty(),
     body('body', 'Body is required').not().isEmpty(),
@@ -23,7 +25,7 @@ router.post(
       return res.status(400).json({ errors: errors.array() });
     }
     try {
-      const newSurvey = {
+      const survey = new Survey({
         user: req.user.id,
         title,
         body,
@@ -31,8 +33,7 @@ router.post(
         recipient: recipient
           .split(',')
           .map((email) => ({ email: email.trim() })),
-      };
-      const survey = new Survey(newSurvey);
+      });
       await survey.save();
       res.json(survey);
     } catch (error) {

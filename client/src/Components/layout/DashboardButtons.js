@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import StripeCheckout from 'react-stripe-checkout';
 import { connect } from 'react-redux';
 import { addCredits } from '../../actions/auth';
+import { Link } from 'react-router-dom';
 
 const DashboardButtons = ({ addCredits }) => {
   return (
@@ -18,10 +19,17 @@ const DashboardButtons = ({ addCredits }) => {
                 addCredits(token);
               }}
               stripeKey={process.env.REACT_APP_STRIPE_KEY}>
-              <button className='btn btn-primary btn-block'>
+              <button className='btn btn-warning btn-block'>
                 <i className='fas fa-plus'></i> Add Credits
               </button>
             </StripeCheckout>
+          </div>
+          <div className='col-md-3'>
+            <Link to='/create-survey'>
+              <button className='btn btn-success btn-block'>
+                <i className='fas fa-plus'></i> Create Survey
+              </button>
+            </Link>
           </div>
         </div>
       </div>
