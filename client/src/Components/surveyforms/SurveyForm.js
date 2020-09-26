@@ -2,19 +2,26 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-const SurveyForm = (props) => {
+import { createSurvey } from '../../actions/survey';
+const SurveyForm = ({ createSurvey }) => {
   const [formState, setFormState] = useState({
     title: '',
     subject: '',
     body: '',
-    recipient: [],
+    recipient: '',
   });
   const handleFormState = (e) => {
     setFormState({ ...formState, [e.target.name]: e.target.value });
   };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    createSurvey(formState);
+  };
   return (
     <>
-      <header id='main-header' className='py-2 bg-primary text-white expand-sm'>
+      <header
+        id='main-header'
+        className='py-2 bg-primary text-white expand-sm survey'>
         <div className='container'>
           <div className='row'>
             <div className='col'>
@@ -28,7 +35,7 @@ const SurveyForm = (props) => {
       </header>
       <div className='container'>
         <h4>Create Your Survey</h4>
-        <form>
+        <form onSubmit={handleSubmit}>
           <div className='form-group'></div>
           <input
             type='text'
@@ -60,7 +67,7 @@ const SurveyForm = (props) => {
             <input
               type='text'
               placeholder='Recipients'
-              name='recepients'
+              name='recipient'
               className='form-control form-control-lg'
               onChange={handleFormState}
             />
@@ -68,11 +75,16 @@ const SurveyForm = (props) => {
               Please Seperate Each Recipient With a Comma
             </small>
           </div>
-          <div className='d-flex'>
-            <input type='submit' className='btn btn-primary mr-4' />
-            <Link to='/dashboard' className='btn btn-secondary'>
-              Go back
-            </Link>
+          <div className='d-flex survey-buttons'>
+            <div>
+              <input type='submit' className='btn btn-primary mr-4' />
+            </div>
+            <div>
+              {' '}
+              <Link to='/dashboard' className='btn btn-secondary'>
+                Go back
+              </Link>
+            </div>
           </div>
         </form>
       </div>
@@ -80,6 +92,8 @@ const SurveyForm = (props) => {
   );
 };
 
-SurveyForm.propTypes = {};
+SurveyForm.propTypes = {
+  createSurvey: PropTypes.func.isRequired,
+};
 
-export default SurveyForm;
+export default connect(null, { createSurvey })(SurveyForm);

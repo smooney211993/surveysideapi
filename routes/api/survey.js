@@ -7,9 +7,9 @@ const requireCredits = require('../../middleware/requireCredits');
 
 // create new survey
 // cookie required
-
+//api/survey/me
 router.post(
-  '/survey',
+  '/',
   isAuth,
   requireCredits,
   [
@@ -42,5 +42,23 @@ router.post(
     }
   }
 );
+
+// cookies needed
+// api/survey/me
+router.get('/me', isAuth, async (req, res) => {
+  const { id } = req.user;
+  try {
+    const surveys = await Survey.find({ user: id });
+    if (!survey) {
+      return res
+        .status(400)
+        .json({ msg: 'There are no surveys for this user' });
+    }
+    res.json(surveys);
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).json('Server Error');
+  }
+});
 
 module.exports = router;
