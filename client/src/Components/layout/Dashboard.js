@@ -1,10 +1,14 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
+import { getSurveys } from '../../actions/survey';
 import PropTypes from 'prop-types';
 import Spinner from './Spinner';
 import DashboardButtons from './DashboardButtons';
-const Dashboard = ({ user, loading }) => {
-  return loading ? (
+const Dashboard = ({ user, survey: { surveys, loading }, getSurveys }) => {
+  useEffect(() => {
+    getSurveys();
+  }, [getSurveys]);
+  return loading && surveys === null ? (
     <Spinner />
   ) : (
     <>
@@ -42,6 +46,6 @@ Dashboard.propTypes = {
 
 const mappedStateToProps = (state) => ({
   user: state.auth.user,
-  loading: state.auth.loading,
+  survey: state.survey,
 });
-export default connect(mappedStateToProps)(Dashboard);
+export default connect(mappedStateToProps, { getSurveys })(Dashboard);

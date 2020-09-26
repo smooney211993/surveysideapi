@@ -1,4 +1,4 @@
-import { CREATE_SURVEY, SURVEY_ERROR } from '../actions/types';
+import { CREATE_SURVEY, SURVEY_ERROR, GET_SURVEYS } from '../actions/types';
 const initialState = {
   survey: null,
   surveys: [],
@@ -14,6 +14,14 @@ export default function (state = initialState, action) {
         ...state,
         surveys: [payload, ...state.surveys],
         loading: false,
+        error: null,
+      };
+    case GET_SURVEYS:
+      return {
+        ...state,
+        surveys: payload,
+        loading: false,
+        error: null,
       };
     case SURVEY_ERROR:
       return { ...state, loading: false, error: payload };
