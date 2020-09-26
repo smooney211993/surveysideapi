@@ -9,6 +9,7 @@ export const createSurvey = (formState) => async (dispatch) => {
       type: CREATE_SURVEY,
       payload: data,
     });
+    dispatch(setAlert('Survey Created', 'success'));
   } catch (error) {
     const err = error.response.data.errors;
     if (err) {

@@ -6,6 +6,7 @@ import {
   PAYMENT_SUCCESS,
   PAYMENT_FAIL,
 } from './types';
+import { setAlert } from './alert';
 export const loadUser = () => async (dispatch) => {
   try {
     const response = await axios.get('/api/auth/me');
@@ -41,6 +42,7 @@ export const addCredits = (paymentToken) => async (dispatch) => {
       type: PAYMENT_SUCCESS,
       payload: data,
     });
+    dispatch(setAlert('Sucessfully Added Credits', 'success'));
   } catch (error) {
     dispatch({
       type: PAYMENT_FAIL,
