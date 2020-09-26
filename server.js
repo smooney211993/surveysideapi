@@ -12,6 +12,7 @@ require('./config/passport')(passport);
 // route handlers
 const auth = require('./routes/api/auth');
 const billing = require('./routes/api/billing');
+const survey = require('./routes/api/survey');
 
 connectDB();
 app.use(
@@ -31,7 +32,7 @@ app.get('/', (req, res) => {
 
 app.use('/api/auth', auth);
 app.use('/api/billing', billing);
-
+app.use('api/survey', survey);
 app.listen(PORT, () => {
   console.log(`Server is running on ${PORT}`);
 });

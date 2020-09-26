@@ -23,6 +23,7 @@ router.get(
 );
 router.get('/me', isAuth, (req, res) => {
   res.send(req.user);
+  console.log(req.user.id);
 });
 
 router.get('/logout', (req, res) => {

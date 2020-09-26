@@ -1,5 +1,10 @@
 const mongoose = require('mongoose');
+const Recipient = require('./Recipient');
 const surveySchema = new mongoose.Schema({
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'user',
+  },
   title: {
     type: String,
     required: true,
@@ -11,6 +16,19 @@ const surveySchema = new mongoose.Schema({
   subject: {
     type: String,
     required: true,
+  },
+  yes: {
+    type: Number,
+    default: 0,
+  },
+  no: {
+    type: Number,
+    default: 0,
+  },
+  recipient: [Recipient],
+  created: {
+    type: Date,
+    default: Date.now,
   },
 });
 
