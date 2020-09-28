@@ -13,10 +13,10 @@ router.post(
   isAuth,
   requireCredits,
   [
-    body('title', 'Title is required').not().isEmpty(),
+    body('title', 'Title is Required').not().isEmpty(),
     body('body', 'Body is required').not().isEmpty(),
-    body('subject', 'Subject is required').not().isEmpty(),
-    body('recipient', 'Recipient is required').not().isEmpty(),
+    body('subject', 'Subject is Required').not().isEmpty(),
+    body('recipient', 'Recipient is Required').not().isEmpty(),
   ],
   async (req, res) => {
     const { title, body, subject, recipient } = req.body;
@@ -58,7 +58,6 @@ router.get('/me', isAuth, async (req, res) => {
         .json({ msg: 'There are no surveys for this user' });
     }
     res.json(surveys);
-    console.log(surveys);
   } catch (error) {
     console.log(error.message);
     res.status(500).json('Server Error');

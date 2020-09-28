@@ -82,7 +82,7 @@ const SurveyForm = ({ createSurvey }) => {
             <div>
               {' '}
               <Link to='/dashboard' className='btn btn-secondary'>
-                Go back
+                Back
               </Link>
             </div>
           </div>

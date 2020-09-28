@@ -1,4 +1,9 @@
-import { CREATE_SURVEY, SURVEY_ERROR, GET_SURVEYS } from '../actions/types';
+import {
+  CREATE_SURVEY,
+  SURVEY_ERROR,
+  GET_SURVEYS,
+  CLEAR_SURVEY,
+} from '../actions/types';
 const initialState = {
   survey: null,
   surveys: [],
@@ -9,6 +14,13 @@ const initialState = {
 export default function (state = initialState, action) {
   const { payload, type } = action;
   switch (type) {
+    case CLEAR_SURVEY:
+      return {
+        ...state,
+        survey: null,
+        loading: false,
+        error: null,
+      };
     case CREATE_SURVEY:
       return {
         ...state,

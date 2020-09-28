@@ -1,4 +1,9 @@
-import { CREATE_SURVEY, SURVEY_ERROR, GET_SURVEYS } from './types';
+import {
+  CREATE_SURVEY,
+  SURVEY_ERROR,
+  GET_SURVEYS,
+  CLEAR_SURVEY,
+} from './types';
 import { setAlert } from './alert';
 import axios from 'axios';
 
@@ -23,6 +28,7 @@ export const createSurvey = (formState) => async (dispatch) => {
 };
 
 export const getSurveys = () => async (dispatch) => {
+  dispatch({ type: CLEAR_SURVEY });
   try {
     const { data } = await axios.get('/api/survey/me');
     dispatch({
