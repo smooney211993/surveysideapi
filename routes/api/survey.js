@@ -4,6 +4,7 @@ const { body, validationResult } = require('express-validator');
 const Survey = require('../../models/Survey');
 const isAuth = require('../../middleware/isAuth');
 const requireCredits = require('../../middleware/requireCredits');
+//const Mailer = require('../../helpers/Mailer');
 
 // create new survey
 // cookie required

@@ -7,6 +7,17 @@ const connectDB = require('./config/db');
 const keys = require('./config/keys');
 const cors = require('cors');
 
+const sgMail = require('@sendgrid/mail');
+sgMail.setApiKey(keys.sendGridKey);
+const msg = {
+  to: 'test@example.com',
+  from: 'stephenmooney1993@gmail.com',
+  subject: 'Sending with Twilio SendGrid is Fun',
+  text: 'and easy to do anywhere, even with Node.js',
+  html: '<strong>and easy to do anywhere, even with Node.js</strong>',
+};
+sgMail.send(msg);
+
 // passport config
 require('./config/passport')(passport);
 // route handlers
