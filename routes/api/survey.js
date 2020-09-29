@@ -4,7 +4,8 @@ const { body, validationResult } = require('express-validator');
 const Survey = require('../../models/Survey');
 const isAuth = require('../../middleware/isAuth');
 const requireCredits = require('../../middleware/requireCredits');
-//const Mailer = require('../../helpers/Mailer');
+const Mailer = require('../../helpers/Mailer');
+const template = require('../../helpers/EmailTemplate');
 
 // create new survey
 // cookie required
@@ -34,8 +35,11 @@ router.post(
         recipient: recipient
           .split(',')
           .map((email) => ({ email: email.trim() })),
+        created: Date.now(),
       });
+
       await survey.save();
+      const mailer = new Mailer(survey, template);
       res.json(survey);
     } catch (error) {
       console.log(error.message);

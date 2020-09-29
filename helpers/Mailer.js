@@ -1,6 +1,6 @@
 const sendgrid = require('sendgrid');
 const helper = sendgrid.mail;
-class Mailer extends helper.mail {
+class Mailer extends helper.Mail {
   constructor({ subject, recipients }, content) {
     super();
   }
