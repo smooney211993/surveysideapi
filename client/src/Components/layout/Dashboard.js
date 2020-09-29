@@ -4,6 +4,7 @@ import { getSurveys } from '../../actions/survey';
 import PropTypes from 'prop-types';
 import Spinner from './Spinner';
 import DashboardButtons from './DashboardButtons';
+import Alert from './Alert';
 const Dashboard = ({ user, survey: { surveys, loading }, getSurveys }) => {
   useEffect(() => {
     getSurveys();
@@ -24,6 +25,7 @@ const Dashboard = ({ user, survey: { surveys, loading }, getSurveys }) => {
           </div>
         </div>
       </header>
+      <Alert />
       <div className='container'>
         <div className='row'>
           <div className='col'>

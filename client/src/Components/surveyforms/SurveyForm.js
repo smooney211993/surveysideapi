@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import Alert from '../layout/Alert';
 import { connect } from 'react-redux';
 import { createSurvey } from '../../actions/survey';
 const SurveyForm = ({ createSurvey }) => {
@@ -33,6 +34,7 @@ const SurveyForm = ({ createSurvey }) => {
           </div>
         </div>
       </header>
+      <Alert />
       <div className='container'>
         <h4>Create Your Survey</h4>
         <form onSubmit={handleSubmit}>

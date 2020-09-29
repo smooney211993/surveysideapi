@@ -37,6 +37,8 @@ const DashboardButtons = ({ addCredits }) => {
   );
 };
 
-DashboardButtons.propTypes = {};
+DashboardButtons.propTypes = {
+  addCredits: PropTypes.func.isRequired,
+};
 
 export default connect(null, { addCredits })(DashboardButtons);
