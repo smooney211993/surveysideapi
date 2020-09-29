@@ -1,22 +1,22 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Alert from '../layout/Alert';
 import { connect } from 'react-redux';
 import { createSurvey } from '../../actions/survey';
-const SurveyForm = ({ createSurvey }) => {
+const SurveyForm = ({ createSurvey, history }) => {
   const [formState, setFormState] = useState({
     title: '',
     subject: '',
     body: '',
-    recipient: '',
+    recipients: '',
   });
   const handleFormState = (e) => {
     setFormState({ ...formState, [e.target.name]: e.target.value });
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    createSurvey(formState);
+    createSurvey(formState, history);
   };
   return (
     <>
@@ -69,7 +69,7 @@ const SurveyForm = ({ createSurvey }) => {
             <input
               type='text'
               placeholder='Recipients'
-              name='recipient'
+              name='recipients'
               className='form-control form-control-lg'
               onChange={handleFormState}
             />
@@ -98,4 +98,4 @@ SurveyForm.propTypes = {
   createSurvey: PropTypes.func.isRequired,
 };
 
-export default connect(null, { createSurvey })(SurveyForm);
+export default connect(null, { createSurvey })(withRouter(SurveyForm));

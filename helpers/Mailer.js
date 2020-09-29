@@ -4,6 +4,7 @@ const keys = require('../config/keys');
 class Mailer extends helper.Mail {
   constructor({ subject, recipients }, content) {
     super();
+
     this.sgApi = sendgrid(keys.sendGridKey);
     this.from_email = new helper.Email('stephenmooney1993@gmail.com');
     this.subject = subject;
@@ -11,21 +12,24 @@ class Mailer extends helper.Mail {
     this.recipients = this.formatAddresses(recipients);
 
     this.addContent(this.body);
-    // register the body with the email itself
     this.addClickTracking();
-    // sendgrid replaces the links with their own to track the response
     this.addRecipients();
   }
+
   formatAddresses(recipients) {
-    return recipients.map(({ email }) => new helper.Email(email));
+    return recipients.map(({ email }) => {
+      return new helper.Email(email);
+    });
   }
-  // grabs the email from the array of objects in the subdoc and then format it with the email.helper
+
   addClickTracking() {
     const trackingSettings = new helper.TrackingSettings();
     const clickTracking = new helper.ClickTracking(true, true);
+
     trackingSettings.setClickTracking(clickTracking);
     this.addTrackingSettings(trackingSettings);
   }
+
   addRecipients() {
     const personalize = new helper.Personalization();
 
@@ -42,8 +46,12 @@ class Mailer extends helper.Mail {
       body: this.toJSON(),
     });
 
-    const response = await this.sgApi.API(request);
-    return response;
+    try {
+      const response = await this.sgApi.API(request);
+      return response;
+    } catch (error) {
+      console.log(error);
+    }
   }
 }
 

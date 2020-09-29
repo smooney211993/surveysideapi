@@ -5,7 +5,7 @@ const Survey = require('../../models/Survey');
 const isAuth = require('../../middleware/isAuth');
 const requireCredits = require('../../middleware/requireCredits');
 const Mailer = require('../../helpers/Mailer');
-const template = require('../../helpers/EmailTemplate');
+const content = require('../../helpers/EmailTemplate');
 
 // create new survey
 // cookie required
@@ -18,10 +18,10 @@ router.post(
     body('title', 'Title is Required').not().isEmpty(),
     body('body', 'Body is required').not().isEmpty(),
     body('subject', 'Subject is Required').not().isEmpty(),
-    body('recipient', 'Recipient is Required').not().isEmpty(),
+    body('recipients', 'Recipient is Required').not().isEmpty(),
   ],
   async (req, res) => {
-    const { title, body, subject, recipient } = req.body;
+    const { title, body, subject, recipients } = req.body;
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
@@ -32,17 +32,18 @@ router.post(
         title,
         body,
         subject,
-        recipient: recipient
+        recipients: recipients
           .split(',')
           .map((email) => ({ email: email.trim() })),
         created: Date.now(),
       });
 
       await survey.save();
-      const mailer = new Mailer(survey, template);
+      const mailer = new Mailer(survey, content(survey));
+      mailer.send();
       res.json(survey);
     } catch (error) {
-      console.log(error.message);
+      console.log(error);
       res.status(500).json('Server Error');
     }
   }

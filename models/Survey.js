@@ -25,7 +25,7 @@ const surveySchema = new mongoose.Schema({
     type: Number,
     default: 0,
   },
-  recipient: [Recipient],
+  recipients: [Recipient],
   created: {
     type: Date,
     default: Date.now,

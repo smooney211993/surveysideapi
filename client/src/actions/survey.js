@@ -7,7 +7,7 @@ import {
 import { setAlert } from './alert';
 import axios from 'axios';
 
-export const createSurvey = (formState) => async (dispatch) => {
+export const createSurvey = (formState, history) => async (dispatch) => {
   try {
     const { data } = await axios.post('/api/survey', formState);
     dispatch({
@@ -15,6 +15,7 @@ export const createSurvey = (formState) => async (dispatch) => {
       payload: data,
     });
     dispatch(setAlert('Survey Created', 'success'));
+    history.push('/dashboard');
   } catch (error) {
     const err = error.response.data.errors;
     if (err) {
