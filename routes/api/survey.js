@@ -37,10 +37,9 @@ router.post(
           .map((email) => ({ email: email.trim() })),
         created: Date.now(),
       });
-
-      await survey.save();
       const mailer = new Mailer(survey, content(survey));
-      mailer.send();
+      await mailer.send();
+      await survey.save();
       res.json(survey);
     } catch (error) {
       console.log(error);

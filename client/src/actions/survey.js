@@ -15,7 +15,7 @@ export const createSurvey = (formState, history) => async (dispatch) => {
       payload: data,
     });
     dispatch(setAlert('Survey Created', 'success'));
-    history.push('/dashboard');
+    //history.push('/dashboard');
   } catch (error) {
     const err = error.response.data.errors;
     if (err) {
