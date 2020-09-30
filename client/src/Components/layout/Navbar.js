@@ -6,7 +6,7 @@ import { logOut, addCredits } from '../../actions/auth';
 import StripeCheckout from 'react-stripe-checkout';
 
 const Navbar = ({
-  auth: { loading, isAuthenticated, user, credits },
+  auth: { loading, isAuthenticated, user },
   logOut,
   addCredits,
 }) => {

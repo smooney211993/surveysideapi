@@ -1,13 +1,20 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { getSurveys } from '../../actions/survey';
+import { loadUser } from '../../actions/auth';
 import PropTypes from 'prop-types';
 import Spinner from './Spinner';
 import DashboardButtons from './DashboardButtons';
 import Alert from './Alert';
-const Dashboard = ({ user, survey: { surveys, loading }, getSurveys }) => {
+const Dashboard = ({
+  user,
+  survey: { surveys, loading },
+  getSurveys,
+  loadUser,
+}) => {
   useEffect(() => {
     getSurveys();
+    //loadUser();
   }, [getSurveys]);
   return loading && surveys === null ? (
     <Spinner />
@@ -50,4 +57,4 @@ const mappedStateToProps = (state) => ({
   user: state.auth.user,
   survey: state.survey,
 });
-export default connect(mappedStateToProps, { getSurveys })(Dashboard);
+export default connect(mappedStateToProps, { getSurveys, loadUser })(Dashboard);

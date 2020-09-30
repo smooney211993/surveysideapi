@@ -38,9 +38,14 @@ router.post(
         created: Date.now(),
       });
       const mailer = new Mailer(survey, content(survey));
-      await mailer.send();
-      await survey.save();
-      res.json(survey);
+      const mailerResponse = await mailer.send();
+      if (mailerResponse.statusCode === 202) {
+        await survey.save();
+        req.user.credits -= 1;
+        const user = await req.user.save();
+        console.log(user.credits);
+        return res.json({ user, survey });
+      }
     } catch (error) {
       console.log(error);
       res.status(500).json('Server Error');

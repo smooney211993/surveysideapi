@@ -3,19 +3,27 @@ import {
   SURVEY_ERROR,
   GET_SURVEYS,
   CLEAR_SURVEY,
+  USER_LOADED,
 } from './types';
 import { setAlert } from './alert';
 import axios from 'axios';
 
 export const createSurvey = (formState, history) => async (dispatch) => {
   try {
-    const { data } = await axios.post('/api/survey', formState);
+    const {
+      data: { user, survey },
+    } = await axios.post('/api/survey', formState);
     dispatch({
       type: CREATE_SURVEY,
-      payload: data,
+      payload: survey,
     });
+    dispatch({
+      type: USER_LOADED,
+      payload: user,
+    });
+
     dispatch(setAlert('Survey Created', 'success'));
-    //history.push('/dashboard');
+    history.push('/dashboard');
   } catch (error) {
     const err = error.response.data.errors;
     if (err) {
