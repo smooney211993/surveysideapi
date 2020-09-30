@@ -10,6 +10,7 @@ class Mailer extends helper.Mail {
     this.subject = subject;
     this.body = new helper.Content('text/html', content);
     this.recipients = this.formatAddresses(recipients);
+    // formats the recipients
 
     this.addContent(this.body);
     this.addClickTracking();
@@ -21,6 +22,7 @@ class Mailer extends helper.Mail {
       return new helper.Email(email);
     });
   }
+  // recipient formatter
 
   addClickTracking() {
     const trackingSettings = new helper.TrackingSettings();
@@ -38,6 +40,7 @@ class Mailer extends helper.Mail {
     });
     this.addPersonalization(personalize);
   }
+  // adds the receipients to the body
 
   async send() {
     const request = this.sgApi.emptyRequest({
@@ -50,7 +53,7 @@ class Mailer extends helper.Mail {
       const response = await this.sgApi.API(request);
       return response;
     } catch (error) {
-      console.log(error);
+      console.log(error.message);
     }
   }
 }
